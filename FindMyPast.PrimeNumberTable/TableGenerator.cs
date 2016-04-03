@@ -1,20 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+
 namespace FindMyPast.PrimeNumberTable
 {
     public class TableGenerator
     {
+        private readonly IValidatePrimeNumbers _primeNumberValidator;
+
         public TableGenerator(IValidatePrimeNumbers primeNumberValidator)
         {
+            _primeNumberValidator = primeNumberValidator;
         }
 
-        public string[][] GenerateWithDimensionOf(int requiredDimension)
+        public List<List<string>> GenerateWithDimensionOf(int requiredDimension)
         {
-            return new[]
+            var primeNumbersCounter = 0;
+            var primeNumbersFound = new List<int>();
+            var counter = 2;
+            while (primeNumbersCounter != requiredDimension)
             {
-                new[] { "","2","3","5"},
-                new[] {"2","4","6", "10"},
-                new[] {"3","6","9","15"},  
-                new[] {"5","10","15","25"},  
+                if (_primeNumberValidator.IsPrime(counter))
+                {
+                    primeNumbersCounter++;
+                    primeNumbersFound.Add(counter);
+                }
+
+                counter++;
+            }
+
+            var tableHeader = CreateTableHeader(primeNumbersFound);
+
+            return new List<List<string>>
+            {
+                tableHeader,
+                new List<string> {"2", "4", "6", "10"},
+                new List<string> {"3", "6", "9", "15"},
+                new List<string> {"5", "10", "15", "25"}
             };
+        }
+
+        private static List<string> CreateTableHeader(List<int> primeNumbersFound)
+        {
+            var tableHeader = new List<string>();
+            tableHeader.Add("");
+            foreach (var primeNumber in primeNumbersFound)
+            {
+                tableHeader.Add(primeNumber.ToString());
+            }
+            return tableHeader;
         }
     }
 }

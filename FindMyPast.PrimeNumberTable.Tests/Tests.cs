@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
 
 namespace FindMyPast.PrimeNumberTable.Tests
 {
@@ -9,13 +12,13 @@ namespace FindMyPast.PrimeNumberTable.Tests
         public void GettingStartedWithExampleProvided()
         {
             var primeNumberValidator = new StubPrimeNumberValidator();
-//            primeNumberValidator.LoadWith(new[] {2, 3, 5});
+            primeNumberValidator.LoadWith(new[] {2, 3, 5});
 
             var tableGenerator = new TableGenerator(primeNumberValidator);
 
-            string[][] resultTable = tableGenerator.GenerateWithDimensionOf(3);
+            var resultTable = tableGenerator.GenerateWithDimensionOf(3);
 
-            Assert.That(resultTable.Length, Is.EqualTo(4));
+            Assert.That(resultTable.Count, Is.EqualTo(4));
             Assert.That(resultTable[2][3], Is.EqualTo("15"));
         }
 
@@ -27,7 +30,7 @@ namespace FindMyPast.PrimeNumberTable.Tests
 
             var tableGenerator = new TableGenerator(primeNumberValidator);
 
-            string[][] resultTable = tableGenerator.GenerateWithDimensionOf(3);
+            var resultTable = tableGenerator.GenerateWithDimensionOf(3);
 
             Assert.That(resultTable[0][1], Is.EqualTo("2"));
             Assert.That(resultTable[0][2], Is.EqualTo("4"));
@@ -43,6 +46,15 @@ namespace FindMyPast.PrimeNumberTable.Tests
         public void LoadWith(int[] stubbedValidValues)
         {
             _stubbedValidValues = stubbedValidValues;
+        }
+
+        public bool IsPrime(int input)
+        {
+            if (_stubbedValidValues.Contains(input))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
