@@ -9,7 +9,7 @@ namespace FindMyPast.PrimeNumberTable.Tests
         public void GettingStartedWithExampleProvided()
         {
             var primeNumberValidator = new StubPrimeNumberValidator();
-            primeNumberValidator.LoadWith(new[] {2, 3, 5});
+//            primeNumberValidator.LoadWith(new[] {2, 3, 5});
 
             var tableGenerator = new TableGenerator(primeNumberValidator);
 
@@ -17,6 +17,22 @@ namespace FindMyPast.PrimeNumberTable.Tests
 
             Assert.That(resultTable.Length, Is.EqualTo(4));
             Assert.That(resultTable[2][3], Is.EqualTo("15"));
+        }
+
+        [Test]
+        public void RowHeadersAndColumnsShouldBeValidated()
+        {
+            var primeNumberValidator = new StubPrimeNumberValidator();
+            primeNumberValidator.LoadWith(new[] {2, 4, 7}); // not actual prime numbers
+
+            var tableGenerator = new TableGenerator(primeNumberValidator);
+
+            string[][] resultTable = tableGenerator.GenerateWithDimensionOf(3);
+
+            Assert.That(resultTable[0][1], Is.EqualTo("2"));
+            Assert.That(resultTable[0][2], Is.EqualTo("4"));
+            Assert.That(resultTable[0][3], Is.EqualTo("7"));
+
         }
     }
 
