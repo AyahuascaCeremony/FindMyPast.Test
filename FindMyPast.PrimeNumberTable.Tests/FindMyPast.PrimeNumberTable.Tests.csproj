@@ -50,6 +50,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FindMyPast.PrimeNumberTable\FindMyPast.PrimeNumberTable.csproj">
+      <Project>{8308b168-239b-4719-a286-46d8e591de67}</Project>
+      <Name>FindMyPast.PrimeNumberTable</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
