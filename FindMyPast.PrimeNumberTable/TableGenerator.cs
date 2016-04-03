@@ -14,6 +14,21 @@ namespace FindMyPast.PrimeNumberTable
 
         public List<List<string>> GenerateWithDimensionOf(int requiredDimension)
         {
+            var primeNumbersFound = GetPrimeNumbers(requiredDimension);
+
+            var tableHeader = CreateTableHeader(primeNumbersFound);
+
+            return new List<List<string>>
+            {
+                tableHeader,
+                new List<string> {"2", "4", "6", "10"},
+                new List<string> {"3", "6", "9", "15"},
+                new List<string> {"5", "10", "15", "25"}
+            };
+        }
+
+        private List<int> GetPrimeNumbers(int requiredDimension)
+        {
             var primeNumbersCounter = 0;
             var primeNumbersFound = new List<int>();
             var counter = 2;
@@ -27,16 +42,7 @@ namespace FindMyPast.PrimeNumberTable
 
                 counter++;
             }
-
-            var tableHeader = CreateTableHeader(primeNumbersFound);
-
-            return new List<List<string>>
-            {
-                tableHeader,
-                new List<string> {"2", "4", "6", "10"},
-                new List<string> {"3", "6", "9", "15"},
-                new List<string> {"5", "10", "15", "25"}
-            };
+            return primeNumbersFound;
         }
 
         private static List<string> CreateTableHeader(List<int> primeNumbersFound)
