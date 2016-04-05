@@ -1,0 +1,55 @@
+﻿@using System.Web.UI.WebControls
+@model FindMyPast.PrimeNumberTable.Website.Models.TableModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Table</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            font-size: 18pt;
+            border: 1px solid black;
+            text-align: right;
+            vertical-align: central;
+            height: 2em;
+            width: 30px;
+            padding-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h4>Prime Number Table</h4>
+        <hr />
+        <dl class="dl-horizontal"></dl>
+        <table>
+
+            @foreach (var row in Model.Rows)
+            {
+                <tr>
+                    @foreach (var dataValue in row)
+                    {
+                        <td>
+                            @dataValue
+                        </td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Back to Homepage", "Index")
+    </p>
+</body>
+</html>

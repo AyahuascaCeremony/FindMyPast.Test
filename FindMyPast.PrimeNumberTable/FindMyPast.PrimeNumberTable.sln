@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyPast.PrimeNumberTable
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyPast.PrimeNumberTable.Tests", "..\FindMyPast.PrimeNumberTable.Tests\FindMyPast.PrimeNumberTable.Tests.csproj", "{2315941D-184A-45BA-AFF6-76C1778E665E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyPast.PrimeNumberTable.Website", "..\FindMyPast.PrimeNumberTable.Website\FindMyPast.PrimeNumberTable.Website.csproj", "{E309E601-EE1C-4811-8890-09E0B70D6857}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2315941D-184A-45BA-AFF6-76C1778E665E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2315941D-184A-45BA-AFF6-76C1778E665E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2315941D-184A-45BA-AFF6-76C1778E665E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E309E601-EE1C-4811-8890-09E0B70D6857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E309E601-EE1C-4811-8890-09E0B70D6857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E309E601-EE1C-4811-8890-09E0B70D6857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E309E601-EE1C-4811-8890-09E0B70D6857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
