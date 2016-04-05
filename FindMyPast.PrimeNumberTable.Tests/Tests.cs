@@ -22,20 +22,24 @@ namespace FindMyPast.PrimeNumberTable.Tests
             Assert.That(resultTable[2][3], Is.EqualTo("15"));
         }
 
-        [Test]
-        public void RowHeadersAndColumnsShouldBeValidated()
+        [TestCase(2,4,7)]
+        [TestCase(3,5,9)]
+        public void RowHeadersAndColumnsShouldBeValidated(int firstHeadingValue, int secondHeadingValue, int thirdHeadingValue)
         {
             var primeNumberValidator = new StubPrimeNumberValidator();
-            primeNumberValidator.LoadWith(new[] {2, 4, 7}); // not actual prime numbers
+            primeNumberValidator.LoadWith(new[] {firstHeadingValue, secondHeadingValue, thirdHeadingValue}); // not actual prime numbers
 
             var tableGenerator = new TableGenerator(primeNumberValidator);
 
             var resultTable = tableGenerator.GenerateWithDimensionOf(3);
 
-            Assert.That(resultTable[0][1], Is.EqualTo("2"));
-            Assert.That(resultTable[0][2], Is.EqualTo("4"));
-            Assert.That(resultTable[0][3], Is.EqualTo("7"));
+            Assert.That(resultTable[0][1], Is.EqualTo(firstHeadingValue.ToString()));
+            Assert.That(resultTable[0][2], Is.EqualTo(secondHeadingValue.ToString()));
+            Assert.That(resultTable[0][3], Is.EqualTo(thirdHeadingValue.ToString()));
 
+            Assert.That(resultTable[1][0], Is.EqualTo(firstHeadingValue.ToString()));
+            Assert.That(resultTable[2][0], Is.EqualTo(secondHeadingValue.ToString()));
+            Assert.That(resultTable[3][0], Is.EqualTo(thirdHeadingValue.ToString()));
         }
     }
 

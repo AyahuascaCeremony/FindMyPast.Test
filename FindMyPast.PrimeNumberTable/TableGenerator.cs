@@ -18,13 +18,17 @@ namespace FindMyPast.PrimeNumberTable
 
             var tableHeader = CreateTableHeader(primeNumbersFound);
 
-            return new List<List<string>>
+            var table = new List<List<string>>
             {
-                tableHeader,
-                new List<string> {"2", "4", "6", "10"},
-                new List<string> {"3", "6", "9", "15"},
-                new List<string> {"5", "10", "15", "25"}
+                tableHeader
             };
+
+            for (var i = 1; i <= requiredDimension; i++)
+            {
+                table.Add(new List<string> {tableHeader[i]});
+            }
+
+            return table;
         }
 
         private List<int> GetPrimeNumbers(int requiredDimension)
