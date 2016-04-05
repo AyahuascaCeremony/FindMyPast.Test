@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -5,6 +6,7 @@ namespace FindMyPast.PrimeNumberTable
 {
     public class TableGenerator
     {
+        private const int TOP_LEFT_CORNER = 0;
         private readonly IValidatePrimeNumbers _primeNumberValidator;
 
         public TableGenerator(IValidatePrimeNumbers primeNumberValidator)
@@ -12,20 +14,35 @@ namespace FindMyPast.PrimeNumberTable
             _primeNumberValidator = primeNumberValidator;
         }
 
-        public List<List<string>> GenerateWithDimensionOf(int requiredDimension)
+        public List<List<int>> GenerateWithDimensionOf(int requiredDimension)
         {
             var primeNumbersFound = GetPrimeNumbers(requiredDimension);
 
             var tableHeader = CreateTableHeader(primeNumbersFound);
 
-            var table = new List<List<string>>
+            var table = new List<List<int>>
             {
                 tableHeader
             };
 
             for (var i = 1; i <= requiredDimension; i++)
             {
-                table.Add(new List<string> {tableHeader[i]});
+                var tableRow = new List<int>();
+                var rowValue = tableHeader[i];
+
+                foreach (var headerValue in tableHeader)
+                {
+                    if (headerValue == TOP_LEFT_CORNER)
+                    {
+                        tableRow.Add(rowValue);
+                    }
+                    else
+                    {
+                        var columnValue = headerValue;
+                        tableRow.Add(rowValue*columnValue);
+                    }
+                }
+                table.Add(tableRow);
             }
 
             return table;
@@ -49,13 +66,13 @@ namespace FindMyPast.PrimeNumberTable
             return primeNumbersFound;
         }
 
-        private static List<string> CreateTableHeader(List<int> primeNumbersFound)
+        private static List<int> CreateTableHeader(List<int> primeNumbersFound)
         {
-            var tableHeader = new List<string>();
-            tableHeader.Add("");
+            var tableHeader = new List<int>();
+            tableHeader.Add(TOP_LEFT_CORNER);
             foreach (var primeNumber in primeNumbersFound)
             {
-                tableHeader.Add(primeNumber.ToString());
+                tableHeader.Add(primeNumber);
             }
             return tableHeader;
         }
