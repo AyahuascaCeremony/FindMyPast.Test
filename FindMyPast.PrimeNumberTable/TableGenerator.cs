@@ -8,6 +8,7 @@ namespace FindMyPast.PrimeNumberTable
     {
         private const int TOP_LEFT_CORNER = 0;
         private readonly IValidatePrimeNumbers _primeNumberValidator;
+        private List<int> _primeNumbers;
 
         public TableGenerator(IValidatePrimeNumbers primeNumberValidator)
         {
@@ -16,36 +17,35 @@ namespace FindMyPast.PrimeNumberTable
 
         public List<List<int>> GenerateWithDimensionOf(int requiredDimension)
         {
-            var primeNumbersFound = GetPrimeNumbers(requiredDimension);
+            _primeNumbers = GetPrimeNumbers(requiredDimension);
 
-            var tableHeader = CreateTableHeader(primeNumbersFound);
+            var tableHeader = CreateTableHeader(_primeNumbers);
 
             var table = new List<List<int>>
             {
                 tableHeader
             };
 
-            for (var i = 1; i <= requiredDimension; i++)
+            for (var i = 0; i < requiredDimension; i++)
             {
-                var tableRow = new List<int>();
-                var rowValue = tableHeader[i];
-
-                foreach (var headerValue in tableHeader)
-                {
-                    if (headerValue == TOP_LEFT_CORNER)
-                    {
-                        tableRow.Add(rowValue);
-                    }
-                    else
-                    {
-                        var columnValue = headerValue;
-                        tableRow.Add(rowValue*columnValue);
-                    }
-                }
-                table.Add(tableRow);
+                table.Add(CreateTableRow(i));
             }
 
             return table;
+        }
+
+        private List<int> CreateTableRow(int rowIndex)
+        {
+            var tableRow = new List<int>();
+
+            var rowValue = _primeNumbers[rowIndex];
+            tableRow.Add(rowValue);
+
+            foreach (var primeNumber in _primeNumbers)
+            {
+                tableRow.Add(rowValue * primeNumber);
+            }
+            return tableRow;
         }
 
         private List<int> GetPrimeNumbers(int requiredDimension)
